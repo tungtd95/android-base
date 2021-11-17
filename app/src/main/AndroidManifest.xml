@@ -13,7 +13,9 @@
         android:theme="@style/Theme.Moddroid"
         tools:ignore="AllowBackup">
 
-        <activity android:name=".ui.home.HomeActivity">
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />

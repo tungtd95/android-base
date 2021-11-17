@@ -1,9 +1,9 @@
 package com.moddroid.utils
 
-import android.app.Activity
+ import android.annotation.SuppressLint
+ import android.app.Activity
 import android.content.Context
 import android.os.Build
-import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -15,7 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 fun Fragment.showKeyboardDelay(view: View, delayTime: Long = 0) {
-    Handler().postDelayed({
+    view.postDelayed({
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
         imm?.showSoftInput(view, 0)
     }, delayTime)
@@ -51,6 +51,7 @@ fun Activity.changeStatusBarIconColor(isLight: Boolean) {
     }
 }
 
+@SuppressLint("CheckResult")
 fun ImageView.loadImage(
     imageUrl: String?,
     cornerRadius: Float? = null,
