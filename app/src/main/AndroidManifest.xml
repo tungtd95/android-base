@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.moddroid">
+    package="com.sekiro">
 
     <application
-        android:name=".MainApplication"
+        android:name="com.sekiro.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Moddroid"
+        android:theme="@style/Theme.Weather"
         tools:ignore="AllowBackup">
 
         <activity
-            android:name=".ui.home.HomeActivity"
+            android:name="com.sekiro.ui.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
