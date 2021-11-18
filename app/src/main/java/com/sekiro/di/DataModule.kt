@@ -1,6 +1,9 @@
 package com.sekiro.di
 
+import android.content.Context
+import androidx.room.Room
 import com.sekiro.BuildConfig
+import com.sekiro.data.localdatabase.WeatherDatabase
 import com.sekiro.data.repo.WeatherRepo
 import com.sekiro.data.service.WeatherService
 import com.sekiro.data.utils.ErrorHandler
@@ -14,7 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val dataModule = module {
     single { createWeatherService() }
-    single { WeatherRepo(get()) }
+    single { createWeatherDatabase(get()) }
+    single { WeatherRepo(get(), get()) }
     single { createErrorHandler() }
 }
 
@@ -36,6 +40,9 @@ fun createRetrofit(baseUrl: String): Retrofit {
 
 fun createWeatherService(): WeatherService =
     createRetrofit(BuildConfig.BASE_URL).create(WeatherService::class.java)
+
+fun createWeatherDatabase(context: Context): WeatherDatabase =
+    Room.databaseBuilder(context, WeatherDatabase::class.java, "weather-db").build()
 
 fun createErrorHandler(): ErrorHandler = ErrorHandler()
 

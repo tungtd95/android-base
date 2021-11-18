@@ -41,10 +41,13 @@ class AddCityActivity : BaseActivity<AddCityViewModel>(), CitiesController.Liste
         viewModel.loading.observe(this, {
             binding.pbSearching.isVisible = it.isLoading
         })
+        viewModel.addCityToFavComplete.observe(this, {
+            onBackPressed()
+        })
     }
 
     override fun onClickCity(city: City) {
-        // TODO: Add city to favorite
+        viewModel.addCityToFav(city)
     }
 
     companion object {

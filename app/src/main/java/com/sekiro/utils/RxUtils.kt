@@ -3,6 +3,7 @@ package com.sekiro.utils
 import androidx.lifecycle.MutableLiveData
 import com.sekiro.ui.base.BaseViewModel
 import io.reactivex.CompletableTransformer
+import io.reactivex.FlowableTransformer
 import io.reactivex.ObservableTransformer
 import io.reactivex.SingleTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -36,6 +37,12 @@ fun <T> applyScheduleSingle(
 
 fun applyScheduleCompletable(): CompletableTransformer =
     CompletableTransformer { upstream ->
+        upstream.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+fun <T> applyScheduleFlowable(): FlowableTransformer<T, T> =
+    FlowableTransformer { upstream ->
         upstream.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

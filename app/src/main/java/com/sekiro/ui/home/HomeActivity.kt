@@ -23,4 +23,11 @@ class HomeActivity : BaseActivity<HomeViewModel>() {
             startActivity(AddCityActivity.getStartIntent(this))
         }
     }
+
+    override fun setupViewModel() {
+        super.setupViewModel()
+        viewModel.cities.observe(this, {
+            binding.tvTest.text = "cities size = ${it.size}"
+        })
+    }
 }
