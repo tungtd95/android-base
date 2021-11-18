@@ -4,7 +4,8 @@ package com.sekiro.utils
  import android.app.Activity
 import android.content.Context
 import android.os.Build
-import android.view.View
+ import android.os.Handler
+ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -14,19 +15,20 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
-fun Fragment.showKeyboardDelay(view: View, delayTime: Long = 0) {
+fun Context.showKeyboardDelay(view: View, delayTime: Long = 0) {
     view.postDelayed({
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        view.requestFocus()
+        val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
         imm?.showSoftInput(view, 0)
     }, delayTime)
 }
 
-fun Fragment.hideKeyBoard() {
+fun Context.hideKeyBoard(view: View) {
     val inputManager: InputMethodManager =
-        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    view?.post {
+        this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    Handler(this.mainLooper).post {
         inputManager.hideSoftInputFromWindow(
-            view?.windowToken,
+            view.windowToken,
             InputMethodManager.HIDE_NOT_ALWAYS
         )
     }

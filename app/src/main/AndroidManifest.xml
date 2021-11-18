@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sekiro">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.sekiro.MainApplication"
         android:allowBackup="true"
@@ -21,6 +23,8 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.addcity.AddCityActivity" />
     </application>
 
 </manifest>

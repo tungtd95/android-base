@@ -1,5 +1,6 @@
 package com.sekiro.di
 
+import com.sekiro.BuildConfig
 import com.sekiro.data.repo.WeatherRepo
 import com.sekiro.data.service.WeatherService
 import com.sekiro.data.utils.ErrorHandler
@@ -34,7 +35,7 @@ fun createRetrofit(baseUrl: String): Retrofit {
 }
 
 fun createWeatherService(): WeatherService =
-    createRetrofit("").create(WeatherService::class.java)
+    createRetrofit(BuildConfig.BASE_URL).create(WeatherService::class.java)
 
 fun createErrorHandler(): ErrorHandler = ErrorHandler()
 

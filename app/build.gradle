@@ -21,13 +21,15 @@ android {
     buildTypes {
         buildTypes {
             debug {
-                buildConfigField "String", "BASE_URL", "\"https://dev-api.eatery.delivery/customer/\""
+                buildConfigField "String", "BASE_URL", "\"https://api.openweathermap.org\""
+                buildConfigField "String", "OPEN_WEATHER_KEY", "\"1f930c31692eff97a92281d72455c44a\""
             }
             release {
                 minifyEnabled false
                 proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-                buildConfigField "String", "BASE_URL", "\"https://dev-api.eatery.delivery/customer/\""
+                buildConfigField "String", "BASE_URL", "\"https://api.openweathermap.org\""
+                buildConfigField "String", "OPEN_WEATHER_KEY", "\"1f930c31692eff97a92281d72455c44a\""
             }
         }
     }
@@ -37,6 +39,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 
@@ -75,7 +80,7 @@ dependencies {
     // 3rd party support
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
-    implementation 'com.airbnb.android:epoxy:3.7.0'
-    kapt 'com.airbnb.android:epoxy-processor:3.7.0'
+    implementation 'com.airbnb.android:epoxy:4.4.4'
+    kapt 'com.airbnb.android:epoxy-processor:4.4.4'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }
