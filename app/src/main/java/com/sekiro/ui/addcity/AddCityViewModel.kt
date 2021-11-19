@@ -51,7 +51,7 @@ class AddCityViewModel(
         weatherRepo.searchCitiesByName(query)
             .compose(applyScheduleSingle(loading))
             .subscribe({
-                cities.postValue(it)
+                cities.postValue(it.filter { city -> city.lat != null && city.lon != null })
             }, {
                 handleError(it)
             })

@@ -13,8 +13,8 @@ class WeatherRepo(
     private val localDatabase: WeatherDatabase
 ) {
 
-    fun getWeatherByCityId(cityName: String): Single<Weather> =
-        service.getWeatherByCityName(cityName)
+    fun getWeatherByCity(city: City): Single<Weather> =
+        service.getWeatherByCityLatLng(city.lat, city.lon)
 
     fun searchCitiesByName(query: String): Single<List<City>> =
         service.getCitiesByName(query)

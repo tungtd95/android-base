@@ -3,9 +3,9 @@ package com.sekiro.data.models
 import com.google.gson.annotations.SerializedName
 
 data class Weather(
-    val main: WeatherMain,
+    val main: WeatherMain?,
     @SerializedName("weather")
-    val weathers: List<WeatherInfo>
+    val weathers: List<WeatherInfo>?
 )
 
 data class WeatherMain(

@@ -10,8 +10,9 @@ import retrofit2.http.Query
 interface WeatherService {
 
     @GET("/data/2.5/weather?appid=${BuildConfig.OPEN_WEATHER_KEY}")
-    fun getWeatherByCityName(
-        @Query("q") cityName: String
+    fun getWeatherByCityLatLng(
+        @Query("lat") latitude: Float?,
+        @Query("lon") longitude: Float?
     ): Single<Weather>
 
     @GET("/geo/1.0/direct?appid=${BuildConfig.OPEN_WEATHER_KEY}")
