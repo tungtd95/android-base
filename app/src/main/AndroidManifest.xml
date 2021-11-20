@@ -24,6 +24,20 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".deeplink.DeepLinkHandlerActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="sekiro" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".ui.addcity.AddCityActivity" />
 
         <service
