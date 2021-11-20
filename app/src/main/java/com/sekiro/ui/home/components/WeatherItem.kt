@@ -24,6 +24,8 @@ class WeatherItem @JvmOverloads constructor(
         @ModelProp set
     var onRemove: (() -> Unit)? = null
         @CallbackProp set
+    var onWeatherSelected: (() -> Unit)? = null
+        @CallbackProp set
 
     private val binding = ItemWeatherBinding.inflate(LayoutInflater.from(context), this, true)
 
@@ -35,6 +37,9 @@ class WeatherItem @JvmOverloads constructor(
             binding.tvTemperature.text = "${it.second.main?.temp?.toInt()} Fahrenheit"
             binding.ivRemove.setOnClickListener {
                 onRemove?.invoke()
+            }
+            binding.root.setOnClickListener {
+                onWeatherSelected?.invoke()
             }
         }
     }

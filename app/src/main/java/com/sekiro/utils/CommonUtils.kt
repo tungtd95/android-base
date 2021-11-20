@@ -24,15 +24,6 @@ fun Long?.toSimpleDisplayDate(pattern: String = "MMM dd/yyyy HH:mm"): String {
     return formatter.format(calendar.time)
 }
 
-fun View.backgroundColor(rawColor: String?) {
-    rawColor?.let {
-        DrawableCompat.setTint(
-            background,
-            rawColor.toColor(ContextCompat.getColor(context, R.color.icon_disable))
-        )
-    }
-}
-
 fun String.toColor(@ColorInt defaultColor: Int): Int = try {
     require(this.isNotEmpty())
     Color.parseColor(this)

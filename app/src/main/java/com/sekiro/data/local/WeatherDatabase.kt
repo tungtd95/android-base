@@ -1,4 +1,4 @@
-package com.sekiro.data.localdatabase
+package com.sekiro.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

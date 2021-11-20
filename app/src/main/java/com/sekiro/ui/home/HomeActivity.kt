@@ -5,13 +5,14 @@ import android.widget.Toast
 import com.airbnb.deeplinkdispatch.DeepLink
 import com.sekiro.data.models.City
 import com.sekiro.databinding.ActivityHomeBinding
-import com.sekiro.deeplink.DEEP_LINK_HOME
+import com.sekiro.deeplink.DeepLinkConst
 import com.sekiro.ui.addcity.AddCityActivity
 import com.sekiro.ui.base.BaseActivity
+import com.sekiro.ui.citydetails.CityDetailsActivity
 import com.sekiro.ui.home.components.WeatherController
 import org.koin.android.ext.android.inject
 
-@DeepLink(DEEP_LINK_HOME)
+@DeepLink(DeepLinkConst.HOME)
 class HomeActivity : BaseActivity<HomeViewModel>(), WeatherController.Listener {
 
     private lateinit var binding: ActivityHomeBinding
@@ -50,6 +51,10 @@ class HomeActivity : BaseActivity<HomeViewModel>(), WeatherController.Listener {
         viewModel.errorMessage.observe(this, {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    override fun onWeatherSelected(city: City) {
+        startActivity(CityDetailsActivity.getStartIntent(this, city))
     }
 
     override fun onRemove(city: City) {

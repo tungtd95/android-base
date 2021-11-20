@@ -1,6 +1,6 @@
 package com.sekiro.data.repo
 
-import com.sekiro.data.localdatabase.WeatherDatabase
+import com.sekiro.data.local.WeatherDatabase
 import com.sekiro.data.models.City
 import com.sekiro.data.models.Weather
 import com.sekiro.data.service.WeatherService
@@ -15,6 +15,15 @@ class WeatherRepo(
 
     fun getWeatherByCity(city: City): Single<Weather> =
         service.getWeatherByCityLatLng(city.lat, city.lon)
+
+    fun getWeatherByCityId(cityId: Int): Single<Pair<City, Weather>> =
+        localDatabase.weatherDao().getCityById(cityId)
+            .flatMapSingle { city ->
+                service.getWeatherByCityLatLng(city.lat, city.lon)
+                    .map {
+                        Pair(city, it)
+                    }
+            }
 
     fun searchCitiesByName(query: String): Single<List<City>> =
         service.getCitiesByName(query)

@@ -1,19 +1,21 @@
 package com.sekiro.utils
 
- import android.annotation.SuppressLint
- import android.app.Activity
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Build
- import android.os.Handler
- import android.view.View
+import android.os.Handler
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
-import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.sekiro.R
 
 fun Context.showKeyboardDelay(view: View, delayTime: Long = 0) {
     view.postDelayed({
@@ -39,10 +41,10 @@ fun Activity.changeStatusBarIconColor(isLight: Boolean) {
         if (isLight) {
             window.decorView.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN and
-                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
         } else {
             window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
-                View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
     } else { // lollipop
         if (isLight) {
@@ -63,4 +65,13 @@ fun ImageView.loadImage(
         placeHolder?.let { placeholder(placeHolder) }
         cornerRadius?.let { transform(CenterCrop(), RoundedCorners(it.toInt())) }
     }.into(this)
+}
+
+fun View.backgroundColor(rawColor: String?) {
+    rawColor?.let {
+        DrawableCompat.setTint(
+            background,
+            rawColor.toColor(ContextCompat.getColor(context, R.color.icon_disable))
+        )
+    }
 }

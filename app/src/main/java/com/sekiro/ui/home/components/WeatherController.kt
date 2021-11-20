@@ -26,11 +26,13 @@ class WeatherController(
                 id(WeatherItem.ID, it.first.getFullName(), it.second.main.toString())
                 weather(it)
                 onRemove { listener.onRemove(it.first) }
+                onWeatherSelected { listener.onWeatherSelected(it.first) }
             }
         }
     }
 
     interface Listener {
+        fun onWeatherSelected(city: City)
         fun onRemove(city: City)
     }
 }

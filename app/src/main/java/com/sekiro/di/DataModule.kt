@@ -3,7 +3,7 @@ package com.sekiro.di
 import android.content.Context
 import androidx.room.Room
 import com.sekiro.BuildConfig
-import com.sekiro.data.localdatabase.WeatherDatabase
+import com.sekiro.data.local.WeatherDatabase
 import com.sekiro.data.repo.WeatherRepo
 import com.sekiro.data.service.WeatherService
 import com.sekiro.data.utils.ErrorHandler

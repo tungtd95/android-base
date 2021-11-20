@@ -40,6 +40,8 @@
 
         <activity android:name=".ui.addcity.AddCityActivity" />
 
+        <activity android:name=".ui.citydetails.CityDetailsActivity" />
+
         <service
             android:name=".utils.AppFirebaseMessageService"
             android:exported="false">

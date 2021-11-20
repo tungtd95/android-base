@@ -1,4 +1,10 @@
 package com.sekiro.deeplink
 
-const val DEEP_LINK_HOME = "sekiro://weather.sekiro.com"
-const val DEEP_LINK_CITY_WEATHER_DETAIL = "sekiro://weather.sekiro.com/{cityId}"
+object DeepLinkConst {
+    // deepLink params
+    const val PARAM_CITY_ID = "cityId"
+
+    // deepLinks
+    const val HOME = "sekiro://weather.sekiro.com"
+    const val CITY_WEATHER_DETAIL = "sekiro://weather.sekiro.com/{$PARAM_CITY_ID}"
+}
