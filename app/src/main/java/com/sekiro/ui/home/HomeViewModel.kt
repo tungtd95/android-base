@@ -19,12 +19,14 @@ class HomeViewModel(
 ) : BaseViewModel(errorHandler) {
 
     val weathers: MutableLiveData<List<Pair<City, Weather>>> = MutableLiveData()
+    private var cities: List<City> = emptyList()
 
     init {
         weatherRepo.getCitiesFlow()
             .compose(applyScheduleFlowable())
             .subscribe({
-                getWeathers(it)
+                cities = it
+                getWeathers()
             }, {})
     }
 
@@ -37,7 +39,7 @@ class HomeViewModel(
             .subscribe {}
     }
 
-    private fun getWeathers(cities: List<City>) {
+    fun getWeathers() {
         val requests = cities.map {
             weatherRepo.getWeatherByCity(it).toObservable()
         }
@@ -54,6 +56,6 @@ class HomeViewModel(
                     }
                 }
                 weathers.postValue(result)
-            }, {})
+            }, { handleError(it) })
     }
 }

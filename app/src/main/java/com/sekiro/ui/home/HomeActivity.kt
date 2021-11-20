@@ -1,6 +1,7 @@
 package com.sekiro.ui.home
 
 import android.os.Bundle
+import android.widget.Toast
 import com.sekiro.data.models.City
 import com.sekiro.databinding.ActivityHomeBinding
 import com.sekiro.ui.addcity.AddCityActivity
@@ -26,15 +27,25 @@ class HomeActivity : BaseActivity<HomeViewModel>(), WeatherController.Listener {
             startActivity(AddCityActivity.getStartIntent(this))
         }
         binding.rvWeathers.setController(controller)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getWeathers()
+        }
     }
 
     override fun setupViewModel() {
         super.setupViewModel()
         viewModel.weathers.observe(this, {
             controller.weathers = it
+            binding.swipeRefreshLayout.isRefreshing = false
         })
         viewModel.loading.observe(this, {
             controller.loading = it.isLoading
+            if (!it.isLoading) {
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+        })
+        viewModel.errorMessage.observe(this, {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
     }
 
