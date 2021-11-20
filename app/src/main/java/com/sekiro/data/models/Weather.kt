@@ -18,4 +18,11 @@ data class WeatherInfo(
     val main: String? = null,
     val description: String? = null,
     val icon: String? = null
-)
+) {
+    fun getWeatherIconUrl(): String =
+        if (icon.isNullOrBlank()) {
+            ""
+        } else {
+            "https://openweathermap.org/img/wn/$icon@2x.png"
+        }
+}

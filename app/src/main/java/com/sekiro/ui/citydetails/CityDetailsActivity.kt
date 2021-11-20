@@ -11,6 +11,7 @@ import com.sekiro.databinding.ActivityCityDetailsBinding
 import com.sekiro.deeplink.DeepLinkConst
 import com.sekiro.ui.base.BaseActivity
 import com.sekiro.utils.isDeepLink
+import com.sekiro.utils.loadImage
 import org.koin.android.ext.android.inject
 
 @DeepLink(DeepLinkConst.CITY_WEATHER_DETAIL)
@@ -57,6 +58,7 @@ class CityDetailsActivity : BaseActivity<CityDetailsViewModel>() {
                 R.string.pressure,
                 it.main?.pressure?.toInt() ?: 0
             )
+            binding.ivWeatherIcon.loadImage(it.weathers?.firstOrNull()?.getWeatherIconUrl())
         }
     }
 
