@@ -19,6 +19,8 @@ class CityDetailsActivity : BaseActivity<CityDetailsViewModel>() {
 
     private lateinit var binding: ActivityCityDetailsBinding
 
+    override val shouldShowAd: Boolean = true
+
     override val viewModel: CityDetailsViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {

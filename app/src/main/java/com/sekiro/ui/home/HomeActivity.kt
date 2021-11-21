@@ -2,7 +2,11 @@ package com.sekiro.ui.home
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.airbnb.deeplinkdispatch.DeepLink
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
 import com.sekiro.data.models.City
 import com.sekiro.databinding.ActivityHomeBinding
 import com.sekiro.deeplink.DeepLinkConst
@@ -36,6 +40,7 @@ class HomeActivity : BaseActivity<HomeViewModel>(), WeatherController.Listener {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.getWeathers()
         }
+        loadAd()
     }
 
     override fun setupViewModel() {
@@ -69,5 +74,21 @@ class HomeActivity : BaseActivity<HomeViewModel>(), WeatherController.Listener {
                 viewModel.removeCity(city)
             }
         }, city).show(supportFragmentManager)
+    }
+
+    private fun loadAd() {
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+        binding.adView.adListener = object : AdListener() {
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                super.onAdFailedToLoad(p0)
+                binding.adView.isVisible = false
+            }
+
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                binding.adView.isVisible = true
+            }
+        }
     }
 }

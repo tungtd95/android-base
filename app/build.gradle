@@ -25,13 +25,22 @@ android {
             debug {
                 buildConfigField "String", "BASE_URL", "\"https://api.openweathermap.org\""
                 buildConfigField "String", "OPEN_WEATHER_KEY", "\"1f930c31692eff97a92281d72455c44a\""
+
+                resValue "string", "ad_app_id", "ca-app-pub-3940256099942544~3347511713"
+                resValue "string", "ad_unit_id_full_screen", "ca-app-pub-3940256099942544/1033173712"
+                resValue "string", "ad_unit_id_banner", "ca-app-pub-3940256099942544/6300978111"
+
             }
             release {
-                minifyEnabled false
-                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
                 buildConfigField "String", "BASE_URL", "\"https://api.openweathermap.org\""
                 buildConfigField "String", "OPEN_WEATHER_KEY", "\"1f930c31692eff97a92281d72455c44a\""
+
+                resValue "string", "ad_app_id", "ca-app-pub-3940256099942544~3347511713"
+                resValue "string", "ad_unit_id_full_screen", "ca-app-pub-3940256099942544/1033173712"
+                resValue "string", "ad_unit_id_banner", "ca-app-pub-3940256099942544/6300978111"
+
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             }
         }
     }
@@ -48,7 +57,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.startup:startup-runtime:1.0.0'
     def room_version = "2.3.0"
 
     // Android Support
@@ -62,6 +70,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    kapt "androidx.lifecycle:lifecycle-common-java8:2.4.0"
 
     // Test
     testImplementation 'junit:junit:4.13.2'
@@ -91,6 +102,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.android.gms:play-services-ads:20.4.0'
 
     // Other 3rd party support
     implementation 'com.github.bumptech.glide:glide:4.12.0'

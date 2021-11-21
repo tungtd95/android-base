@@ -8,6 +8,8 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     abstract val viewModel: VM
 
+    open val shouldShowAd: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupViewModel()
