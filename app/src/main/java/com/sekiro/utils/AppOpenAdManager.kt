@@ -32,19 +32,16 @@ class AppOpenManager(private val myApplication: MainApplication) : ActivityLifec
     private val handler = Handler(Looper.getMainLooper())
     private var activityState = ActivityState.UN_AVAILABLE
 
-    /**
-     * Request an ad
-     */
+    init {
+        myApplication.registerActivityLifecycleCallbacks(this)
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+    }
+
     fun fetchAd() {
         if (isAdAvailable) {
             return
         }
         loadCallback = object : AppOpenAdLoadCallback() {
-            /**
-             * Called when an app open ad has loaded.
-             *
-             * @param ad the loaded app open ad.
-             */
             override fun onAdLoaded(ad: AppOpenAd) {
                 appOpenAd = ad
                 loadTime = Date().time
@@ -52,13 +49,7 @@ class AppOpenManager(private val myApplication: MainApplication) : ActivityLifec
                 showAdIfAvailable()
             }
 
-            /**
-             * Called when an app open ad has failed to load.
-             *
-             * @param loadAdError the error.
-             */
             override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                // Handle the error.
                 Log.i(LOG_TAG, "onAdFailedToLoad" + loadAdError.message)
             }
         }
@@ -72,13 +63,8 @@ class AppOpenManager(private val myApplication: MainApplication) : ActivityLifec
         )
     }
 
-    /**
-     * Shows the ad if one isn't already showing.
-     */
     fun showAdIfAvailable() {
-        // Only show ad if there is not already an app open ad currently showing
-        // and an ad is available.
-        if (System.currentTimeMillis() - lastShow < ADD_LOADING_INTERVAL * 60 * 1000) {
+        if (!wasLoadTimeLongerThanIntervalTimeAgo()) {
             return
         }
 
@@ -88,7 +74,6 @@ class AppOpenManager(private val myApplication: MainApplication) : ActivityLifec
             val fullScreenContentCallback: FullScreenContentCallback =
                 object : FullScreenContentCallback() {
                     override fun onAdDismissedFullScreenContent() {
-                        // Set the reference to null so isAdAvailable() returns false.
                         appOpenAd = null
                         isShowingAd = false
                         fetchAd()
@@ -107,22 +92,14 @@ class AppOpenManager(private val myApplication: MainApplication) : ActivityLifec
         }
     }
 
-    /**
-     * Creates and returns ad request.
-     */
     private val adRequest: AdRequest
         get() = AdRequest.Builder().build()
 
-    /**
-     * Utility method that checks if ad exists and can be shown.
-     */
     private val isAdAvailable: Boolean
-        get() = appOpenAd != null && wasLoadTimeLessThanNHoursAgo()
+        get() = appOpenAd != null && wasLoadTimeLongerThanIntervalTimeAgo()
 
-    private fun wasLoadTimeLessThanNHoursAgo(): Boolean {
-        val dateDifference = Date().time - loadTime
-        val numMilliSecondsPerHour: Long = 60000
-        return dateDifference < numMilliSecondsPerHour * ADD_LOADING_INTERVAL
+    private fun wasLoadTimeLongerThanIntervalTimeAgo(): Boolean {
+        return System.currentTimeMillis() - lastShow > ADD_LOADING_INTERVAL * 60 * 1000
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
@@ -164,15 +141,7 @@ class AppOpenManager(private val myApplication: MainApplication) : ActivityLifec
         private const val LOG_TAG = "AppOpenManager"
         private var isShowingAd = false
 
-        private const val ADD_LOADING_INTERVAL = 1L // minutes
-    }
-
-    /**
-     * Constructor
-     */
-    init {
-        myApplication.registerActivityLifecycleCallbacks(this)
-        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+        private const val ADD_LOADING_INTERVAL = 0.5 // minutes
     }
 }
 
