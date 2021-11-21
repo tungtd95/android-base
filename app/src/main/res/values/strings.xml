@@ -8,4 +8,7 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="remove_city">Remove %s?</string>
+    <string name="long_text">If you want to install an older version, you\'ll need to uninstall the current version on your device. And one more note, you can delete [Installer] after the installation is completed to save memory.</string>
+    <string name="see_more">See more</string>
+    <string name="see_less">See less</string>
 </resources>

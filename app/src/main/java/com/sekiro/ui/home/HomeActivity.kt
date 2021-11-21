@@ -11,6 +11,7 @@ import com.sekiro.data.models.City
 import com.sekiro.databinding.ActivityHomeBinding
 import com.sekiro.deeplink.DeepLinkConst
 import com.sekiro.ui.addcity.AddCityActivity
+import com.sekiro.ui.htmlviewer.HtmlViewerActivity
 import com.sekiro.ui.base.BaseActivity
 import com.sekiro.ui.citydetails.CityDetailsActivity
 import com.sekiro.ui.dialog.RemoveCityDialog
@@ -35,6 +36,10 @@ class HomeActivity : BaseActivity<HomeViewModel>(), WeatherController.Listener {
     override fun setupUI() {
         binding.fabAddCity.setOnClickListener {
             startActivity(AddCityActivity.getStartIntent(this))
+        }
+        binding.fabAddCity.setOnLongClickListener {
+            startActivity(HtmlViewerActivity.getStartIntent(this))
+            false
         }
         binding.rvWeathers.setController(controller)
         binding.swipeRefreshLayout.setOnRefreshListener {

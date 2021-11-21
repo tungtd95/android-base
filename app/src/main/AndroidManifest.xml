@@ -42,6 +42,8 @@
 
         <activity android:name=".ui.citydetails.CityDetailsActivity" />
 
+        <activity android:name=".ui.htmlviewer.HtmlViewerActivity" />
+
         <service
             android:name=".utils.AppFirebaseMessageService"
             android:exported="false">
@@ -52,7 +54,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/ad_app_id"/>
+            android:value="@string/ad_app_id" />
     </application>
 
 </manifest>

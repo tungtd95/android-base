@@ -1,6 +1,7 @@
 package com.sekiro.di
 
 import com.sekiro.ui.addcity.AddCityViewModel
+import com.sekiro.ui.htmlviewer.HtmlViewerViewModel
 import com.sekiro.ui.base.DummyViewModel
 import com.sekiro.ui.citydetails.CityDetailsViewModel
 import com.sekiro.ui.home.HomeViewModel
@@ -12,4 +13,5 @@ val viewModelModule = module {
     viewModel { AddCityViewModel(get(), get()) }
     viewModel { CityDetailsViewModel(get(), get()) }
     viewModel { DummyViewModel(get()) }
+    viewModel { HtmlViewerViewModel(get()) }
 }

@@ -145,4 +145,5 @@ dependencies {
     implementation 'com.airbnb:deeplinkdispatch:5.2.0'
     kapt 'com.airbnb:deeplinkdispatch-processor:5.2.0'
     implementation 'app.rive:rive-android:1.0.3'
+    implementation 'com.github.chuross:expandable-layout:1.0.5'
 }
