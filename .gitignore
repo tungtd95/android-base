@@ -6,6 +6,8 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 app/lint
+/app/release/*
+/app/debug/*
 /app/lint/*
 .gradle
 /.idea/*
