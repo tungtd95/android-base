@@ -26,6 +26,7 @@ android {
                 buildConfigField "String", "BASE_URL", "\"https://api.openweathermap.org\""
                 buildConfigField "String", "OPEN_WEATHER_KEY", "\"1f930c31692eff97a92281d72455c44a\""
 
+                resValue "string", "APPLICATION_NAME", "Weather Dev"
                 resValue "string", "ad_app_id", "ca-app-pub-3940256099942544~3347511713"
                 resValue "string", "ad_unit_id_full_screen", "ca-app-pub-3940256099942544/1033173712"
                 resValue "string", "ad_unit_id_banner", "ca-app-pub-3940256099942544/6300978111"
@@ -35,6 +36,7 @@ android {
                 buildConfigField "String", "BASE_URL", "\"https://api.openweathermap.org\""
                 buildConfigField "String", "OPEN_WEATHER_KEY", "\"1f930c31692eff97a92281d72455c44a\""
 
+                resValue "string", "APPLICATION_NAME", "Weather"
                 resValue "string", "ad_app_id", "ca-app-pub-3940256099942544~3347511713"
                 resValue "string", "ad_unit_id_full_screen", "ca-app-pub-3940256099942544/1033173712"
                 resValue "string", "ad_unit_id_banner", "ca-app-pub-3940256099942544/6300978111"
@@ -44,15 +46,45 @@ android {
             }
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
         viewBinding true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file(DEBUG_STORE_FILE)
+            storePassword DEBUG_STORE_PASSWORD
+            keyAlias DEBUG_KEY_ALIAS
+            keyPassword DEBUG_KEY_PASSWORD
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def formattedDate = new Date().format('yyyyMMddHHmm')
+            def buildType = variant.buildType.name
+            outputFileName = "sekiro-" + android.defaultConfig.versionName + "-" + buildType + "-" + formattedDate + ".apk"
+        }
     }
 }
 
