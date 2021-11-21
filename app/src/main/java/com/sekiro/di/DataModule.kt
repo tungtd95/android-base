@@ -3,6 +3,7 @@ package com.sekiro.di
 import android.content.Context
 import androidx.room.Room
 import com.sekiro.BuildConfig
+import com.sekiro.data.local.Pref
 import com.sekiro.data.local.WeatherDatabase
 import com.sekiro.data.repo.WeatherRepo
 import com.sekiro.data.service.WeatherService
@@ -18,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 val dataModule = module {
     single { createWeatherService() }
     single { createWeatherDatabase(get()) }
+    single { createSharedPreference(get()) }
     single { WeatherRepo(get(), get()) }
     single { createErrorHandler() }
 }
@@ -46,3 +48,4 @@ fun createWeatherDatabase(context: Context): WeatherDatabase =
 
 fun createErrorHandler(): ErrorHandler = ErrorHandler()
 
+fun createSharedPreference(context: Context): Pref = Pref(context)

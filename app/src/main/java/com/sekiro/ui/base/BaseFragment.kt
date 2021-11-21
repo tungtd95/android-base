@@ -1,16 +1,14 @@
 package com.sekiro.ui.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
+abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding> : Fragment() {
 
-    @get:LayoutRes
-    abstract val layoutRes: Int
+    var _binding: VB? = null
+    val binding get() = _binding!!
 
     abstract val viewModel: VM
 
@@ -18,12 +16,6 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         super.onCreate(savedInstanceState)
         setupViewModel()
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(layoutRes, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,4 +28,9 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     abstract fun setupObserver()
 
     abstract fun setupUI()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -9,7 +9,9 @@ import com.sekiro.deeplink.DeepLinkConst
 import com.sekiro.ui.addcity.AddCityActivity
 import com.sekiro.ui.base.BaseActivity
 import com.sekiro.ui.citydetails.CityDetailsActivity
+import com.sekiro.ui.dialog.RemoveCityDialog
 import com.sekiro.ui.home.components.WeatherController
+import com.sekiro.ui.splash.SplashDialog
 import org.koin.android.ext.android.inject
 
 @DeepLink(DeepLinkConst.HOME)
@@ -51,6 +53,10 @@ class HomeActivity : BaseActivity<HomeViewModel>(), WeatherController.Listener {
         viewModel.errorMessage.observe(this, {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
+        if (viewModel.isFirstTimeStartup()) {
+            SplashDialog().show(supportFragmentManager)
+            viewModel.markFirstTimeStartup()
+        }
     }
 
     override fun onWeatherSelected(city: City) {
@@ -58,6 +64,10 @@ class HomeActivity : BaseActivity<HomeViewModel>(), WeatherController.Listener {
     }
 
     override fun onRemove(city: City) {
-        viewModel.removeCity(city)
+        RemoveCityDialog(object : RemoveCityDialog.Listener {
+            override fun removeConfirmed() {
+                viewModel.removeCity(city)
+            }
+        }, city).show(supportFragmentManager)
     }
 }

@@ -5,4 +5,8 @@
     <string name="temperature">Temperature: %d Fahrenheit</string>
     <string name="pressure">Pressure: %d Hg</string>
     <string name="humidity">Humidity: %d %%</string>
+    <string name="splash_intro">Discover weather in your beloved cities</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="remove_city">Remove %s?</string>
 </resources>

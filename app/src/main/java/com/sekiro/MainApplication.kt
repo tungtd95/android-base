@@ -1,6 +1,7 @@
 package com.sekiro
 
 import android.app.Application
+import app.rive.runtime.kotlin.core.Rive
 import com.sekiro.di.appModule
 import com.sekiro.di.dataModule
 import com.sekiro.di.viewModelModule
@@ -15,5 +16,6 @@ class MainApplication : Application() {
             androidContext(this@MainApplication)
             modules(listOf(appModule, dataModule, viewModelModule))
         }
+        Rive.init(this)
     }
 }

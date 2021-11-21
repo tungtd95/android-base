@@ -2,6 +2,7 @@ package com.sekiro.ui.home
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
+import com.sekiro.data.local.Pref
 import com.sekiro.data.models.City
 import com.sekiro.data.models.Weather
 import com.sekiro.data.repo.WeatherRepo
@@ -15,7 +16,8 @@ import io.reactivex.Observable
 @SuppressLint("CheckResult")
 class HomeViewModel(
     errorHandler: ErrorHandler,
-    private val weatherRepo: WeatherRepo
+    private val weatherRepo: WeatherRepo,
+    private val pref: Pref
 ) : BaseViewModel(errorHandler) {
 
     val weathers: MutableLiveData<List<Pair<City, Weather>>> = MutableLiveData()
@@ -58,4 +60,8 @@ class HomeViewModel(
                 weathers.postValue(result)
             }, { handleError(it) })
     }
+
+    fun isFirstTimeStartup() = pref.isFirstTimeStartUp()
+
+    fun markFirstTimeStartup() = pref.markFirstTimeStartUp()
 }

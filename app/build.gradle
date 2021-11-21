@@ -48,6 +48,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.startup:startup-runtime:1.0.0'
     def room_version = "2.3.0"
 
     // Android Support
@@ -99,4 +100,5 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'com.airbnb:deeplinkdispatch:5.2.0'
     kapt 'com.airbnb:deeplinkdispatch-processor:5.2.0'
+    implementation 'app.rive:rive-android:1.0.3'
 }
