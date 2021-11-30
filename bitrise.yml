@@ -4,9 +4,37 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: android
 trigger_map:
 - push_branch: master
-  workflow: primary
+  workflow: build-dev
 workflows:
-  primary:
+  build-prod:
+    steps:
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                envman add --key BUILD_VARIANT --value "release"
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: android
+            - exported_environment_variable_names: BUILD_VARIANT
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+  build-dev:
+    steps:
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -x
+
+                envman add --key BUILD_VARIANT --value "debug"
+      - trigger-bitrise-workflow@0:
+          inputs:
+            - workflow_id: android
+            - exported_environment_variable_names: BUILD_VARIANT
+            - api_token: "$BITRISE_TRIGGER_TOKEN"
+  android:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
@@ -18,7 +46,7 @@ workflows:
     - android-build@0:
         inputs:
         - app_path_pattern: "*/build/outputs/apk/*.apk"
-        - variant: debug
+        - variant: $BUILD_VARIANT
     - deploy-to-bitrise-io@2: {}
     - create-install-page-qr-code@1: {}
     - slack@3:
@@ -26,7 +54,7 @@ workflows:
         - image_url: "$BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL"
         - pretext: ''
         - channel: "#android-build"
-        - text: "Build ANDROID-DEV Succeeded! @here"
+        - text: "Build *`Android-$BUILD_VARIANT`* Succeeded! @here"
         - from_username: Sekiro BOT
         - icon_url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99UzpCE5djM64xEfK-XfVP2Dy5G1bPVIlyg&usqp=CAU
         - author_name: ''
@@ -41,7 +69,7 @@ workflows:
         - icon_url_on_error: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR99UzpCE5djM64xEfK-XfVP2Dy5G1bPVIlyg&usqp=CAU
         - pretext_on_error: ''
         - from_username_on_error: Sekiro BOT
-        - text_on_error: "Build ANDROID-DEV Failed! @tungtd95"
+        - text_on_error: "Build *`Android-$BUILD_VARIANT`* Failed! @tungtd95"
         - webhook_url: "$SLACK_WEBHOOK"
     - cache-push@2: {}
 app:
