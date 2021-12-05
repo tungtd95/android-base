@@ -1,4 +1,4 @@
-package com.sekiro.ui.splash
+package com.sekiro.ui.sample.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater

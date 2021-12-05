@@ -10,13 +10,13 @@ import com.google.android.gms.ads.LoadAdError
 import com.sekiro.data.models.City
 import com.sekiro.databinding.ActivityHomeBinding
 import com.sekiro.deeplink.DeepLinkConst
-import com.sekiro.ui.addcity.AddCityActivity
-import com.sekiro.ui.htmlviewer.HtmlViewerActivity
+import com.sekiro.ui.sample.addcity.AddCityActivity
+import com.sekiro.ui.sample.htmlviewer.HtmlViewerActivity
 import com.sekiro.ui.base.BaseActivity
-import com.sekiro.ui.citydetails.CityDetailsActivity
+import com.sekiro.ui.sample.citydetails.CityDetailsActivity
 import com.sekiro.ui.dialog.RemoveCityDialog
 import com.sekiro.ui.home.components.WeatherController
-import com.sekiro.ui.splash.SplashDialog
+import com.sekiro.ui.sample.splash.SplashDialog
 import org.koin.android.ext.android.inject
 
 @DeepLink(DeepLinkConst.HOME)

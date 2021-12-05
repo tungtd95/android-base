@@ -1,4 +1,4 @@
-package com.sekiro.ui.addcity.components
+package com.sekiro.ui.sample.addcity.components
 
 import com.airbnb.epoxy.EpoxyController
 import com.sekiro.data.models.City

@@ -38,11 +38,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.addcity.AddCityActivity" />
+        <activity android:name="com.sekiro.ui.sample.addcity.AddCityActivity" />
 
-        <activity android:name=".ui.citydetails.CityDetailsActivity" />
+        <activity android:name="com.sekiro.ui.sample.citydetails.CityDetailsActivity" />
 
-        <activity android:name=".ui.htmlviewer.HtmlViewerActivity" />
+        <activity android:name="com.sekiro.ui.sample.htmlviewer.HtmlViewerActivity" />
 
         <service
             android:name=".utils.AppFirebaseMessageService"

@@ -1,4 +1,4 @@
-package com.sekiro.ui.addcity
+package com.sekiro.ui.sample.addcity
 
 import androidx.lifecycle.MutableLiveData
 import com.sekiro.data.models.City

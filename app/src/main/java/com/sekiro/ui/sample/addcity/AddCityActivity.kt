@@ -1,4 +1,4 @@
-package com.sekiro.ui.addcity
+package com.sekiro.ui.sample.addcity
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.sekiro.data.models.City
 import com.sekiro.databinding.ActivityAddCityBinding
-import com.sekiro.ui.addcity.components.CitiesController
+import com.sekiro.ui.sample.addcity.components.CitiesController
 import com.sekiro.ui.base.BaseActivity
 import com.sekiro.utils.showKeyboardDelay
 import org.koin.android.ext.android.inject

@@ -1,4 +1,4 @@
-package com.sekiro.ui.htmlviewer
+package com.sekiro.ui.sample.htmlviewer
 
 import androidx.lifecycle.MutableLiveData
 import com.sekiro.data.utils.ErrorHandler

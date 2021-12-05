@@ -1,4 +1,4 @@
-package com.sekiro.ui.addcity.components
+package com.sekiro.ui.sample.addcity.components
 
 import android.annotation.SuppressLint
 import android.content.Context

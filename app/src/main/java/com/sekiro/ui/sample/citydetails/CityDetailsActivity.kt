@@ -1,4 +1,4 @@
-package com.sekiro.ui.citydetails
+package com.sekiro.ui.sample.citydetails
 
 import android.content.Context
 import android.content.Intent

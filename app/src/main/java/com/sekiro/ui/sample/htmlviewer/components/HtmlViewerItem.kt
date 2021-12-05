@@ -1,4 +1,4 @@
-package com.sekiro.ui.htmlviewer.components
+package com.sekiro.ui.sample.htmlviewer.components
 
 import android.content.Context
 import android.text.Html

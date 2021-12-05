@@ -1,11 +1,11 @@
-package com.sekiro.ui.htmlviewer
+package com.sekiro.ui.sample.htmlviewer
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.sekiro.databinding.ActivityHtmlViewerBinding
 import com.sekiro.ui.base.BaseActivity
-import com.sekiro.ui.htmlviewer.components.HtmlViewerController
+import com.sekiro.ui.sample.htmlviewer.components.HtmlViewerController
 import org.koin.android.ext.android.inject
 
 class HtmlViewerActivity : BaseActivity<HtmlViewerViewModel>() {
